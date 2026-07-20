@@ -9,11 +9,14 @@ You will implement the functions in recommender.py:
 - recommend_songs
 """
 
-from recommender import load_songs, recommend_songs
+from .recommender import load_songs, recommend_songs
 
 
 def main() -> None:
     songs = load_songs("data/songs.csv") 
+
+    songs = load_songs("data/songs.csv") #temp
+    print("\nLoaded songs:", len(songs)) #temp
 
     # Starter example profile
     user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
@@ -21,14 +24,12 @@ def main() -> None:
     recommendations = recommend_songs(user_prefs, songs, k=5)
 
     print("\nTop recommendations:\n")
-    for rec in recommendations:
-        # You decide the structure of each returned item.
-        # A common pattern is: (song, score, explanation)
+    for rank, rec in enumerate(recommendations, start=1):
         song, score, explanation = rec
-        print(f"{song['title']} - Score: {score:.2f}")
+        
+        print(f"{rank}. {song['title']} - Score: {score:.2f}")
         print(f"Because: {explanation}")
         print()
-
-
+    
 if __name__ == "__main__":
     main()

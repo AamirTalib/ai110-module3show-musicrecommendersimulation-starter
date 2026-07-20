@@ -18,13 +18,25 @@ Replace this paragraph with your own summary of what your version does.
 ## How The System Works
 
 Explain your design in plain language.
+The recommender works by comparing each songs features with what the user preferences are, It accounts for variables like Genre,mood, energy, acoustics. Every feature builds the score for each song, once every song is scored they are all sorted: highest to lowest, with highest being recommended first. 
 
 Some prompts to answer:
 
 - What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
+  - For example:
+   - Genre
+   - Mood 
+   - Energy
+   - Acousticness
+
 - What information does your `UserProfile` store
+- favorite_genre
+- favorite_mood
+- target_energy
+- likes_acoustic
+
 - How does your `Recommender` compute a score for each song
+
 - How do you choose which songs to recommend
 
 You can include a simple diagram or bullet list if helpful.
