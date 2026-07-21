@@ -13,23 +13,51 @@ from .recommender import load_songs, recommend_songs
 
 
 def main() -> None:
-    songs = load_songs("data/songs.csv") 
+    songs = load_songs("data/songs.csv")
+    print("Loaded songs:", len(songs))
 
-    songs = load_songs("data/songs.csv") #temp
-    print("\nLoaded songs:", len(songs)) #temp
+    profiles = {
+        "High-Energy Pop": {
+            "favorite_genre": "pop",
+            "favorite_mood": "happy",
+            "target_energy": 0.90,
+            "likes_acoustic": False,
+        },
+        "Chill Lofi": {
+            "favorite_genre": "lofi",
+            "favorite_mood": "chill",
+            "target_energy": 0.30,
+            "likes_acoustic": True,
+        },
+        "Deep Intense Rock": {
+            "favorite_genre": "rock",
+            "favorite_mood": "intense",
+            "target_energy": 0.90,
+            "likes_acoustic": False,
+        },
+        "Conflicting Edge Case": {
+            "favorite_genre": "lofi",
+            "favorite_mood": "intense",
+            "target_energy": 0.95,
+            "likes_acoustic": True,
+        },
+    }
 
-    # Starter example profile
-    user_prefs = {"genre": "pop", "mood": "happy", "energy": 0.8}
+    for name, prefs in profiles.items():
+        print("\n" + "=" * 60)
+        print(f"Profile: {name}")
+        print("=" * 60)
 
-    recommendations = recommend_songs(user_prefs, songs, k=5)
+        recommendations = recommend_songs(prefs, songs, k=5)
 
-    print("\nTop recommendations:\n")
-    for rank, rec in enumerate(recommendations, start=1):
-        song, score, explanation = rec
-        
-        print(f"{rank}. {song['title']} - Score: {score:.2f}")
-        print(f"Because: {explanation}")
-        print()
-    
+        for rank, (song, score, explanation) in enumerate(recommendations, start=1):
+            match_pct = score * 100
+            print(f"\n{rank}. {song['title']} - {song['artist']}")
+            print(f"   Final score: {score:.3f}  ({match_pct:.1f}% match)")
+            print("   Reasons:")
+            for reason in explanation.split("; "):
+                print(f"     - {reason}")
+
+
 if __name__ == "__main__":
     main()

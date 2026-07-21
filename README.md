@@ -20,6 +20,9 @@ Replace this paragraph with your own summary of what your version does.
 Explain your design in plain language.
 The recommender works by comparing each songs features with what the user preferences are, It accounts for variables like Genre,mood, energy, acoustics. Every feature builds the score for each song, once every song is scored they are all sorted: highest to lowest, with highest being recommended first. 
 
+Algorithm Recipe:
+final_score = (0.40 × genre_score) + (0.30 × mood_score) + (0.15 × energy_score) + (0.15 × acoustic_score)
+
 Some prompts to answer:
 
 - What features does each `Song` use in your system
@@ -36,8 +39,10 @@ Some prompts to answer:
 - likes_acoustic
 
 - How does your `Recommender` compute a score for each song
+The recommender compares every song with the users profile and gives it a score between 0 -1 
 
 - How do you choose which songs to recommend
+The recommender calculates a score for each song, It then sorts the songs from highest score to lowest score and recommends the higher scoring songs first
 
 You can include a simple diagram or bullet list if helpful.
 
@@ -82,16 +87,24 @@ You can add more tests in `tests/test_recommender.py`.
 
 Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
 
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
-```
+Loaded songs: 10
 
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
+Top recommendations:
+
+1. Sunrise City - Score: 0.97
+Because: Genre matches (pop): +0.40; Mood matches (happy): +0.30; Energy similarity (0.82 vs 0.80): +0.15; Acoustic similarity (0.18 vs target 0.0): +0.12
+
+2. Gym Hero - Score: 0.67
+Because: Genre matches (pop): +0.40; Mood differs (intense): +0.00; Energy similarity (0.93 vs 0.80): +0.13; Acoustic similarity (0.05 vs target 0.0): +0.14
+
+3. Rooftop Lights - Score: 0.54
+Because: Genre differs (indie pop): +0.00; Mood matches (happy): +0.30; Energy similarity (0.76 vs 0.80): +0.14; Acoustic similarity (0.35 vs target 0.0): +0.10
+
+4. Storm Runner - Score: 0.27
+Because: Genre differs (rock): +0.00; Mood differs (intense): +0.00; Energy similarity (0.91 vs 0.80): +0.13; Acoustic similarity (0.10 vs target 0.0): +0.14
+
+5. Night Drive Loop - Score: 0.26
+Because: Genre differs (synthwave): +0.00; Mood differs (moody): +0.00; Energy similarity (0.75 vs 0.80): +0.14; Acoustic similarity (0.22 vs target 0.0): +0.12
 
 ---
 

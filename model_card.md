@@ -66,10 +66,12 @@ Where the system struggles or behaves unfairly.
 Prompts:  
 
 - Features it does not consider  
-- Genres or moods that are underrepresented  
+It does not cosider things like tempo, lyrics or prior listening history 
+- Genres or moods that are underrepresented 
 - Cases where the system overfits to one preference  
+May overfits to a users favorite genre 
 - Ways the scoring might unintentionally favor some users  
-
+It favors users that have more songs 
 ---
 
 ## 7. Evaluation  
@@ -79,7 +81,9 @@ How you checked whether the recommender behaved as expected.
 Prompts:  
 
 - Which user profiles you tested  
+High-Energy Pop, Chill Lofi, Deep Intense Rock, Conflicting Edge Case 
 - What you looked for in the recommendations  
+Compared whether the top recommendations matched each profile’s genre, mood, energy, and acoustic preferences.
 - What surprised you  
 - Any simple tests or comparisons you ran  
 
@@ -109,3 +113,26 @@ Prompts:
 - What you learned about recommender systems  
 - Something unexpected or interesting you discovered  
 - How this changed the way you think about music recommendation apps  
+
+
+
+## OUTPUT: 
+
+Loaded songs: 10
+
+Top recommendations:
+
+1. Sunrise City - Score: 0.97
+Because: Genre matches (pop): +0.40; Mood matches (happy): +0.30; Energy similarity (0.82 vs 0.80): +0.15; Acoustic similarity (0.18 vs target 0.0): +0.12
+
+2. Gym Hero - Score: 0.67
+Because: Genre matches (pop): +0.40; Mood differs (intense): +0.00; Energy similarity (0.93 vs 0.80): +0.13; Acoustic similarity (0.05 vs target 0.0): +0.14
+
+3. Rooftop Lights - Score: 0.54
+Because: Genre differs (indie pop): +0.00; Mood matches (happy): +0.30; Energy similarity (0.76 vs 0.80): +0.14; Acoustic similarity (0.35 vs target 0.0): +0.10
+
+4. Storm Runner - Score: 0.27
+Because: Genre differs (rock): +0.00; Mood differs (intense): +0.00; Energy similarity (0.91 vs 0.80): +0.13; Acoustic similarity (0.10 vs target 0.0): +0.14
+
+5. Night Drive Loop - Score: 0.26
+Because: Genre differs (synthwave): +0.00; Mood differs (moody): +0.00; Energy similarity (0.75 vs 0.80): +0.14; Acoustic similarity (0.22 vs target 0.0): +0.12
